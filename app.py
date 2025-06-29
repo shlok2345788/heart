@@ -1,42 +1,21 @@
 from flask import Flask, request, render_template
 import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
 import joblib
 import os
 
 app = Flask(__name__)
 
-# Load or train the model
-def load_or_train_model():
+# Load the pre-trained model
+def load_model():
     model_path = 'heart_disease_model.pkl'
     if os.path.exists(model_path):
-        # Load the pre-trained model
         model = joblib.load(model_path)
     else:
-        # Load the dataset
-        heart_data = pd.read_csv('heart_disease_data.csv')
-        
-        # Split features and target
-        X = heart_data.drop(columns='target', axis=1)
-        Y = heart_data['target']
-        
-        # Split the data into training and test sets
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, stratify=Y, random_state=2)
-        
-        # Train the logistic regression model
-        model = LogisticRegression(max_iter=1000)  # Increased max_iter to avoid convergence warning
-        model.fit(X_train, Y_train)
-        
-        # Save the trained model
-        joblib.dump(model, model_path)
-    
+        raise FileNotFoundError("Model file 'heart_disease_model.pkl' not found. Please train and save the model locally first.")
     return model
 
 # Load the model
-model = load_or_train_model()
+model = load_model()
 
 @app.route('/')
 def home():
