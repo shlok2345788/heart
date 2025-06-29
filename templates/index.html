@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Heart Disease Prediction</h1>
+        <form action="/predict" method="POST" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                    <input type="number" id="age" name="age" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="sex" class="block text-sm font-medium text-gray-700">Sex (0 = Female, 1 = Male)</label>
+                    <input type="number" id="sex" name="sex" min="0" max="1" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="cp" class="block text-sm font-medium text-gray-700">Chest Pain Type (0-3)</label>
+                    <input type="number" id="cp" name="cp" min="0" max="3" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="trestbps" class="block text-sm font-medium text-gray-700">Resting Blood Pressure (mm Hg)</label>
+                    <input type="number" id="trestbps" name="trestbps" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="chol" class="block text-sm font-medium text-gray-700">Cholesterol (mg/dl)</label>
+                    <input type="number" id="chol" name="chol" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="fbs" class="block text-sm font-medium text-gray-700">Fasting Blood Sugar (> 120 mg/dl, 1 = True, 0 = False)</label>
+                    <input type="number" id="fbs" name="fbs" min="0" max="1" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="restecg" class="block text-sm font-medium text-gray-700">Resting ECG Results (0-2)</label>
+                    <input type="number" id="restecg" name="restecg" min="0" max="2" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="thalach" class="block text-sm font-medium text-gray-700">Maximum Heart Rate Achieved</label>
+                    <input type="number" id="thalach" name="thalach" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="exang" class="block text-sm font-medium text-gray-700">Exercise Induced Angina (1 = Yes, 0 = No)</label>
+                    <input type="number" id="exang" name="exang" min="0" max="1" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="oldpeak" class="block text-sm font-medium text-gray-700">ST Depression (0-6.2)</label>
+                    <input type="number" id="oldpeak" name="oldpeak" step="0.1" min="0" max="6.2" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="slope" class="block text-sm font-medium text-gray-700">Slope of Peak Exercise ST Segment (0-2)</label>
+                    <input type="number" id="slope" name="slope" min="0" max="2" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="ca" class="block text-sm font-medium text-gray-700">Number of Major Vessels (0-4)</label>
+                    <input type="number" id="ca" name="ca" min="0" max="4" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="thal" class="block text-sm font-medium text-gray-700">Thalassemia (0-3)</label>
+                    <input type="number" id="thal" name="thal" min="0" max="3" required class="mt-1 p-2 w-full border rounded-md">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700">Predict</button>
+            </div>
+        </form>
+        {% if prediction_text %}
+        <div class="mt-6 text-center text-lg font-semibold text-gray-800">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
